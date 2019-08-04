@@ -20,7 +20,7 @@ void macro1(){
 //graph.SetTitle("Measurement XYZ;lenght [cm];Arb.Units");
 
   //TGraphErrors graph("./DatsOrderedGamnaSeve19.txt","%lg %lg %lg");
-  TGraphErrors *graph1 = new TGraphErrors("./SensityResultsRE11/RE11SensiNeutron.txt","%lg %lg %lg");
+  TGraphErrors *graph1 = new TGraphErrors("./RE11SensiNeutron.txt","%lg %lg %lg");
  graph1->SetTitle("CMS Sensitivity Simulation RE11;Energy (MeV);RPC sensitivity");
   // Make the plot estetically better
   graph1->SetMarkerStyle(kFullDotMedium);
@@ -30,21 +30,21 @@ void macro1(){
   //graph->GetXaxis(10000);
   //  graph->SetLimits(0,10);
 
-  TGraphErrors *graph2 = new TGraphErrors("./home/simulation/Documents/DocumentsVi/DocsSim/SensityResultsRE11/RE11SensiGamma.txt","%lg %lg %lg");
+  TGraphErrors *graph2 = new TGraphErrors("./RE11SensiGamma.txt","%lg %lg %lg");
   //  graph.SetTitle("CMS Simulation (Neutrons);Energy (MeV);RPC sensitivity");
   // Make the plot estetically better
   graph2->SetMarkerStyle(22);
   graph2->SetMarkerColor(2);
   graph2->SetLineColor(2);
 
-  TGraphErrors *graph3 = new TGraphErrors("./home/simulation/Documents/DocumentsVi/DocsSim/SensityResultsRE11/RE11SensiElectron.txt","%lg %lg %lg");
+  TGraphErrors *graph3 = new TGraphErrors("./RE11SensiElectron.txt","%lg %lg %lg");
   //  graph.SetTitle("CMS Simulation (Neutrons);Energy (MeV);RPC sensitivity");
   // Make the plot estetically better
   graph3->SetMarkerStyle(29);
   graph3->SetMarkerColor(6);
   graph3->SetLineColor(6);
 
-  TGraphErrors *graph4 = new TGraphErrors("./home/simulation/Documents/DocumentsVi/DocsSim/SensityResultsRE11/RE11SensiPositron.txt","%lg %lg %lg");
+  TGraphErrors *graph4 = new TGraphErrors("./RE11SensiPositron.txt","%lg %lg %lg");
   //  graph.SetTitle("CMS Simulation (Neutrons);Energy (MeV);RPC sensitivity");                     
   // Make the plot estetically better                                                               
   graph4->SetMarkerStyle(23);
