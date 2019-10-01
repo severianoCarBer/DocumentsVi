@@ -1,0 +1,111 @@
+// Builds a graph with errors, displays it and saves it as                                         // image. First, include some header files                                                         // (not necessary for Cling)                                                                                                              
+#include "TCanvas.h"
+#include "TROOT.h"
+#include "TGraphErrors.h"
+#include "TF1.h"
+#include "TLegend.h"
+#include "TArrow.h"
+#include "TLatex.h"
+#include "TAxis.h"
+#include "TAttMarker.h"
+
+void macro1(){
+// The values and the errors on the Y axis
+//  const int n_points=10;
+//double x_vals[n_points]={1,2,3,4,5,6,7,8,9,10};
+//double y_vals[n_points]={6,12,14,20,22,24,35,45,44,53};
+//double y_errs[n_points]= {5,5,4.7,4.5,4.2,5.1,2.9,4.1,4.8,5.43};
+// Instan
+//TGraphErrors graph(n_points,x_vals,y_vals,nullptr,y_errs);
+//graph.SetTitle("Measurement XYZ;lenght [cm];Arb.Units");
+
+  //TGraphErrors graph("./DatsOrderedGamnaSeve19.txt","%lg %lg %lg");
+  TGraphErrors *graph1 = new TGraphErrors("./RE11SensiNeutron.txt","%lg %lg %lg");
+ graph1->SetTitle("CMS Sensitivity Simulation RE11 (Neutrons);Energy (MeV);RPC sensitivity");
+  // Make the plot estetically better
+  graph1->SetMarkerStyle(kFullDotMedium);
+  graph1->SetMarkerSize(10);
+  graph1->SetMarkerColor(1);
+  graph1->SetLineColor(1);
+  //graph->GetXaxis(10000);
+  //  graph->SetLimits(0,10);
+
+  TGraphErrors *graph2 = new TGraphErrors("./AliceResults/AliceSensiNeut.txt","%lg %lg %lg");
+  //  graph.SetTitle("CMS Simulation (Neutrons);Energy (MeV);RPC sensitivity");
+  // Make the plot estetically better
+  graph2->SetMarkerStyle(kFullDotMedium);
+  graph2->SetMarkerColor(2);
+  graph2->SetLineColor(2);
+
+  //  TGraphErrors *graph3 = new TGraphErrors("./Dats/DatsOrderedElecSeve19.txt","%lg %lg %lg");
+  //  graph.SetTitle("CMS Simulation (Neutrons);Energy (MeV);RPC sensitivity");
+  // Make the plot estetically better
+  //graph3->SetMarkerStyle(29);
+  //graph3->SetMarkerColor(6);
+  //  graph3->SetLineColor(6);
+
+  //  TGraphErrors *graph4 = new TGraphErrors("./Dats/DatsOrderedPosiSeve19.txt","%lg %lg %lg");
+  //  graph.SetTitle("CMS Simulation (Neutrons);Energy (MeV);RPC sensitivity");                     
+  // Make the plot estetically better                                                               
+  //  graph4->SetMarkerStyle(23);
+  //  graph4->SetMarkerColor(9);
+  //  graph4->SetLineColor(9);
+
+
+  // The canvas on which we'll draw the graph
+  //TCanvas* mycanvas =new TCanvas();
+  TCanvas* mycanvas =new TCanvas("mycanvas","example",10,10,600,400);
+// mycanvas->SetCanvasSize(1500, 1500);
+//  mycanvas->SetWindowSize(1000,2000);
+  mycanvas->SetFillColor(0);
+  mycanvas->SetGrid();
+  mycanvas->SetLogy();
+  mycanvas->SetLogx();
+  // Draw the graph !
+  //graph.DrawClone("APE");
+  //graph1.DrawClone();
+  //  graph.DrawClone("ap1");                                                                       
+
+  graph1->GetXaxis()->SetRangeUser(0.00000001,1000);
+  graph1->GetYaxis()->SetRangeUser(0.0000001,2);    
+  graph1->Draw("AP");
+  graph2->DrawClone("p"); 
+  //  graph3->DrawClone("p");
+  //  graph4->DrawClone("p");
+// Define a linear function
+  //TF1 f("Linear law","[0]+x*[1]",.5,1050);
+
+  // Let's make the funcion line nicer
+  //f.SetLineColor(kRed); f.SetLineStyle(2);
+
+  // Fit it to the graph and draw it
+  //graph.Fit(&f);
+  //f.DrawClone("Same");
+
+  // Build and Draw a legend
+   TLegend *leg = new TLegend(.1,.7,.3,.9);
+   leg->SetHeader("Sensitivity Results");
+   leg->SetFillColor(0);
+   //graph1->SetFillColor(0);
+   //graph2->SetFillColor(1);
+   leg->AddEntry("graph1","Seve Results","P");
+   leg->AddEntry(graph2,"Alice Results");
+   //   leg->AddEntry(graph3,"Electrons");
+   //   leg->AddEntry(graph4,"Positrons");
+   leg->DrawClone("Same");
+
+  // Draw an arrow on the canvas
+  //TArrow arrow(8,8,6.2,23,0.02,"|>");
+  //arrow.SetLineWidth(2);
+  //arrow.DrawClone();
+
+  // Add some text to the plot
+  //TLatex text(8.2,7.5,"#splitline{Maximum}{Deviation}");
+  //text.DrawClone();
+  //mycanvas->Print("graph.pdf");                                                                  
+  mycanvas->SaveAs("PlotSeveAliNeutSensitity.pdf");
+}
+
+int main(){
+  macro1();
+}
